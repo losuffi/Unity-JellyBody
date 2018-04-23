@@ -6,10 +6,20 @@ namespace HuaJiao.JellyMiscNs
 {
     public class JellySphereAgent : IGeometryAgent
     {
-        [SerializeField] public Vector3 Center;
         [SerializeField] public float Radius;
 
 
+        public override Vector3 worldPos
+        {
+            get
+            {
+                return transform.position;
+            }
+        }
+        public override float GetPointDistance(Vector3 targetPoint)
+        {
+            return base.GetPointDistance(targetPoint) - (Radius * Radius);
+        }
         private void OnDrawGizmos()
         {
             Gizmos.color=Color.yellow;

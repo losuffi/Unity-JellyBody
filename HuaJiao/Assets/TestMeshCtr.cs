@@ -11,13 +11,13 @@ public class TestMeshCtr : MonoBehaviour
 
     private Vector3[] velocity;
     private Vector3[] replaceVertices,originVertices;
-    private Renderer renderer;
+    private Renderer r;
     private MeshFilter meshFilter;
     private Mesh mesh;
 
     void Awake()
     {
-        renderer = GetComponent<Renderer>();
+        r = GetComponent<Renderer>();
         meshFilter = GetComponent<MeshFilter>();
         mesh = meshFilter.mesh;
         velocity=new Vector3[mesh.vertices.Length];
