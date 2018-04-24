@@ -26,7 +26,7 @@ namespace HuaJiao.JellyMiscNs
             {
                 agent.Wake();
             }
-            for(int i = 0; i < mesh.vertexCount; i++)
+            for (int i = 0; i < mesh.vertexCount; i++)
             {
                 FindAgent(mesh.vertices[i]).Reg(i,mesh.vertices[i]);
             }
@@ -42,10 +42,6 @@ namespace HuaJiao.JellyMiscNs
             mesh.vertices = vertexTemp;
             mesh.RecalculateNormals();
             mesh.RecalculateTangents();
-        }
-        private void Update()
-        {
-            UpdateMesh();
         }
         private IGeometryAgent FindAgent(Vector3 pos)
         {
@@ -138,7 +134,7 @@ namespace HuaJiao.JellyMiscNs
         }
         public virtual float GetPointDistance(Vector3 targetPoint)
         {
-            return (transform.position - targetPoint).sqrMagnitude;
+            return (originPos - targetPoint).sqrMagnitude;
         }
         public virtual void Reg(int index,Vector3 posWorld)
         {

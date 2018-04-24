@@ -15,11 +15,15 @@ public class TestGun : MonoBehaviour
 	        ray = cam.ScreenPointToRay(Input.mousePosition);
 	        if (Physics.Raycast(ray, out hit, 100))
 	        {
-	            if (hit.collider.GetComponent<HuaJiao.JellyMiscNs.JellyAgentCtr>() != null)
-	            {
+                if (hit.collider.GetComponent<TestMeshCtr>() != null)
+                {
+                    hit.collider.GetComponent<TestMeshCtr>().AddForcce(hit.point, m_Force);
+                }
+                if (hit.collider.GetComponent<HuaJiao.JellyMiscNs.JellyAgentCtr>() != null)
+                {
                     hit.collider.GetComponent<HuaJiao.JellyMiscNs.JellyAgentCtr>().AddForce(hit.point, m_Force);
-	            }
-	        }
+                }
+            }
 	    }
 	}
 }
