@@ -12,6 +12,7 @@ namespace HuaJiao.JellyMiscNs
         private EffectTimer.Task task;
         private MeshFilter meshFilter;
         private Mesh mesh;
+        //private SkinnedMeshRenderer r;
         private Vector3[] vertexTemp;
         private Vector3[] vertexOrigin;
         private void Awake()
@@ -20,6 +21,7 @@ namespace HuaJiao.JellyMiscNs
         }
         public void Init()
         {
+            //r = GetComponent<SkinnedMeshRenderer>();
             meshFilter = GetComponent<MeshFilter>();
             mesh = meshFilter.mesh;
             foreach(IGeometryAgent agent in agents)
@@ -39,9 +41,11 @@ namespace HuaJiao.JellyMiscNs
             {
                 agents[i].UpdatePoints(vertexTemp);
             }
+           
             mesh.vertices = vertexTemp;
-            mesh.RecalculateNormals();
-            mesh.RecalculateTangents();
+            NormalSolver.RecalculateNormals(mesh, 90f);
+            //NormalSolver.ReComputeNormals(mesh);
+            //r.sharedMesh = mesh;
         }
         private IGeometryAgent FindAgent(Vector3 pos)
         {

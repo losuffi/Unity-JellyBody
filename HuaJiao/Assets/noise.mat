@@ -7,12 +7,12 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: noise
-  m_Shader: {fileID: 4800000, guid: 4162d4188614afd41a6f13a59f781ebf, type: 3}
+  m_Shader: {fileID: 4800000, guid: 35247100d0b28c04c893da23a444b6a7, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 3000
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -67,7 +67,7 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _LineWidth: 0.2
+    - _LineWidth: 0
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1

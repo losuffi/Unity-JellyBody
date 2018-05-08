@@ -278,9 +278,11 @@
     <Compile Include="Assets\EffectL\Editor\Views\ViewPanel.cs" />
     <Compile Include="Assets\EffectL\Editor\Windows\EffectLWindow.cs" />
     <Compile Include="Assets\EffectL\Editor\Windows\MapGeneratorWindows.cs" />
+    <Compile Include="Assets\MeshJellyCustom\Editor\JellyCtrEditor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Noise.shader" />
+    <None Include="Assets\VolumetricFog.shader" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
