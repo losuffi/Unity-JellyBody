@@ -281,6 +281,7 @@
     <Compile Include="Assets\MeshJellyCustom\Editor\JellyCtrEditor.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\MeshJellyCustom\Shader\SphereModify.shader" />
     <None Include="Assets\Noise.shader" />
     <None Include="Assets\VolumetricFog.shader" />
   </ItemGroup>

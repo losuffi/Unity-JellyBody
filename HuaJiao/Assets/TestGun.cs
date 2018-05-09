@@ -1,7 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+public interface IGUNReciever
+{
+    void AddForce(Vector3 pos, float force);
+}
 public class TestGun : MonoBehaviour
 {
     [SerializeField] private Camera cam;
@@ -22,6 +25,10 @@ public class TestGun : MonoBehaviour
                 if (hit.collider.GetComponent<HuaJiao.JellyMiscNs.JellyAgentCtr>() != null)
                 {
                     hit.collider.GetComponent<HuaJiao.JellyMiscNs.JellyAgentCtr>().AddForce(hit.point, m_Force);
+                }
+                if (hit.collider.GetComponent<IGUNReciever>() != null)
+                {
+                    hit.collider.GetComponent<IGUNReciever>().AddForce(hit.point, m_Force);
                 }
             }
 	    }

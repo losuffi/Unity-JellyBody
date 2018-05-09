@@ -19,7 +19,7 @@ public class EffectTimer
 
     public abstract class Task
     {
-
+        public string Name;
     }
     private abstract class TimerTask : Task
     {
@@ -34,8 +34,9 @@ public class EffectTimer
         protected RunnerType type;
         protected TimerTask()
         {
-
+            IsLive = true;
         }
+        public bool IsLive { get; set; }
         public abstract bool Tick();
     }
     public enum RunnerType
@@ -129,39 +130,37 @@ public class EffectTimer
         proxy.update += Update;
         MonoBehaviour.DontDestroyOnLoad(p);
     }
-    private Task temp;
+    private TimerTask temp;
     private void Update()
     {
         for (int i = taskCollection.Count - 1; i >= 0; i--)
         {
             temp = taskCollection[i];
-            if (taskCollection[i].Tick())
+            if (!temp.IsLive || temp.Tick())
             {
-                DestroyTask(temp);
+                taskCollection.Remove(temp);
             }
         }
     }
-    public Task RunTimerTask(float duration, RunnerType type, System.Action feedback)
+    public Task RunTimerTask(float duration, RunnerType type, System.Action feedback, string name = "default")
     {
         TimerActionTask task = new TimerActionTask(duration, type);
         task.feedback += feedback;
+        task.Name = name;
         taskCollection.Add(task);
         return task;
     }
-    public Task RunTimerTask(float duration, System.Func<bool> expression, System.Action feedback)
+    public Task RunTimerTask(float duration, System.Func<bool> expression, System.Action feedback, string name = "default")
     {
         BoolActionTask task = new BoolActionTask(duration, expression);
         task.feedback += feedback;
+        task.Name = name;
         taskCollection.Add(task);
         return task;
     }
     public void DestroyTask(Task t)
     {
-        if (t == null || !taskCollection.Contains(t as TimerTask))
-        {
-            return;
-        }
-        taskCollection.Remove((t as TimerTask));
+        (t as TimerTask).IsLive = false;
     }
 }
 public class EffectTimerProxy : MonoBehaviour
