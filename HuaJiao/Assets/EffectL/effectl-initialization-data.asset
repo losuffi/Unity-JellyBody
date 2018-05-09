@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90e6b56f80d00c042ad36e519ec446c1, type: 3}
+  m_Name: effectl-initialization-data
+  m_EditorClassIdentifier: 
+  Skins:
+  - {fileID: 11400000, guid: ae114aaf8dabfa546ad4c0a2bfd47eb1, type: 2}
+  - {fileID: 11400000, guid: f8ba04b4381eea24ba31277125adc2e1, type: 2}
+  - {fileID: 11400000, guid: 4ad8219bbfa409149bcf55b38534464c, type: 2}
+  pics:
+  - {fileID: 2800000, guid: 4ab1df7fc134e8b4c86823e805911657, type: 3}
+  - {fileID: 2800000, guid: 9ed6e24a5da919d4aa5e156c2de8d52d, type: 3}
+  - {fileID: 2800000, guid: eddc05dd022c9fd4bb4d686d3dd8f3e6, type: 3}
+  - {fileID: 2800000, guid: 79f2f4c3b698ea54ead99a668049f029, type: 3}
+  - {fileID: 2800000, guid: 271b47aee91dae1498bcaac82195786a, type: 3}
+  - {fileID: 2800000, guid: 89a7ebf217078b940bb3669f63656d56, type: 3}
+  - {fileID: 2800000, guid: 30bfd95c240b8a1428e841d4857833a6, type: 3}
+  - {fileID: 2800000, guid: 79c7f6a7767db3a449db5b11f823c0d8, type: 3}
+  - {fileID: 2800000, guid: 8804a92d17123b140aaaa18b4f1941ef, type: 3}
+  - {fileID: 2800000, guid: 200e07dfbe953004b8c022e0391fd6c3, type: 3}
+  - {fileID: 2800000, guid: aba9225a321327e4fad2d704cf8fe49d, type: 3}
+  - {fileID: 2800000, guid: d559da9f8b8a6f048bc1473a8a944da4, type: 3}
+  - {fileID: 2800000, guid: 70bd1660d44649940bc4f00c71c9c4c3, type: 3}
+  - {fileID: 2800000, guid: 65a9f97263329de41aa668e00b534b4b, type: 3}
+  - {fileID: 2800000, guid: 0cfb7a90654ce824992e2c6f6aaa649f, type: 3}
+  - {fileID: 2800000, guid: 840ee1304e183854e9176f25790d53e7, type: 3}
+  - {fileID: 2800000, guid: 64e8d2f0dd9cb6044b1acdec9a54249b, type: 3}
+  - {fileID: 2800000, guid: f245026ba2834014cb80a011c25dba52, type: 3}
+  - {fileID: 2800000, guid: 694cd6e9008d7034990077f17850c5db, type: 3}
+  - {fileID: 2800000, guid: 6ccaeefb9b61c7c488123d19857af9ef, type: 3}
+  - {fileID: 2800000, guid: 29b7b902db848f84187ad1ba7f114b5d, type: 3}
+  - {fileID: 2800000, guid: d11d35d3c606f254dabe6f9b54a4a8d2, type: 3}
+  - {fileID: 2800000, guid: 4e6575ee265dec74ebe34f1a38d4dffa, type: 3}
+  - {fileID: 2800000, guid: 08257136d421273439d73272636348a3, type: 3}
+  - {fileID: 2800000, guid: ffed9ad051cd97548b73860c74aacfbd, type: 3}
+  - {fileID: 2800000, guid: 4b799856ed360a84baa6dfd90ca99077, type: 3}
+  - {fileID: 2800000, guid: 1c4a68c4b3604444ba71e21a5a2b6061, type: 3}
+  - {fileID: 2800000, guid: 779e530a66a85b348985a877a049c53d, type: 3}
+  - {fileID: 2800000, guid: a4cb3cba64496f84db4bce78a8776474, type: 3}
+  - {fileID: 2800000, guid: 5df898ece061f57438867ce16862ff06, type: 3}
+  - {fileID: 2800000, guid: 0750316285a1ccf44b45b17022856fdb, type: 3}
+  - {fileID: 2800000, guid: 084ed32ae2e0778468c236dae2c854a7, type: 3}
+  - {fileID: 2800000, guid: 053c1262f8ea0054aa2bb5471d8c884a, type: 3}
+  - {fileID: 2800000, guid: b88992313c1d1cf40b647c8446a3134f, type: 3}
+  - {fileID: 2800000, guid: 763ec15ae18128943a1197e2d8ffec6d, type: 3}
+  - {fileID: 2800000, guid: 9c90e4994d1ef994582d723a66fb32d8, type: 3}
+  - {fileID: 2800000, guid: 1209f40621cdbe04686e875b1c435df6, type: 3}
+  - {fileID: 2800000, guid: afc83eda2795bb1469366b7f1470609b, type: 3}
+  - {fileID: 2800000, guid: 0b89ec37718e6c14f9be877bc2a6958b, type: 3}
+  - {fileID: 2800000, guid: ae282ffe1b96a3e489100def064394c3, type: 3}
+  - {fileID: 2800000, guid: 51e6f011925f94f4caca966d7148926c, type: 3}
+  - {fileID: 2800000, guid: 628611ac0890b854986d033cd416ee83, type: 3}
+  - {fileID: 2800000, guid: 48b70be909020e943bce607f20f6a364, type: 3}
+  - {fileID: 2800000, guid: 0b72db9604d831441982da19eda95443, type: 3}
+  - {fileID: 2800000, guid: b348604c076c4e540855ee861e7b2eac, type: 3}
+  - {fileID: 2800000, guid: e68653e87d98a0943ab8c9f4450e9982, type: 3}
+  Assmbly_ContainName: Assembly-CSharp
+  Diaglog: 
