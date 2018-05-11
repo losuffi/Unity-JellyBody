@@ -97,7 +97,6 @@
      <Compile Include="Assets\MeshJellyCustom\JellySphereAgent.cs" />
      <Compile Include="Assets\MeshJellyCustom\NormalSolver.cs" />
      <Compile Include="Assets\obj\Debug\netcoreapp2.0\Assets.AssemblyInfo.cs" />
-     <Compile Include="Assets\Program.cs" />
      <Compile Include="Assets\TestGun.cs" />
      <Compile Include="Assets\TestMeshCtr.cs" />
      <None Include="Assets\VolumetricFog.shader" />

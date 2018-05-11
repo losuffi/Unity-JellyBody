@@ -14,6 +14,8 @@ public class JellyShaderModify : MonoBehaviour,IGUNReciever
     [SerializeField]
     public float Damping;
     [SerializeField]
+    public float Namida;
+    [SerializeField]
     public int CountMax;
     private MeshRenderer render;
     private int probe;
@@ -55,6 +57,7 @@ public class JellyShaderModify : MonoBehaviour,IGUNReciever
         render.sharedMaterial.SetInt("_Count", CountMax);
         render.sharedMaterial.SetFloat("_Spring", Spring);
         render.sharedMaterial.SetFloat("_Damping", Damping);
+        render.sharedMaterial.SetFloat("_Namida",Namida);
         render.sharedMaterial.SetVectorArray("_pAfs", pAfs);
         render.sharedMaterial.SetVectorArray("_dAts", dAts);
     }

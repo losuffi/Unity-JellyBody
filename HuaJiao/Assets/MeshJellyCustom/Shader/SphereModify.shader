@@ -21,6 +21,7 @@ Shader "EffectL/SphereModify"
 		float _MaxForce;
 		float _Spring;
 		float _Damping;
+		float _Namida;
 		ENDCG
 		Pass
 		{
@@ -46,6 +47,14 @@ Shader "EffectL/SphereModify"
 			{
 				float4 resPos;
 				float3 resNormal;
+			};
+			struct dataBuff
+			{
+				float _StartTime;
+				float _Force;
+				float _Namida;
+				float3 _ForceDir;
+				float4 _WorldForcePos;
 			};
 			result ModifyPos(float4 pos,in float3 normal)
 			{
@@ -77,6 +86,39 @@ Shader "EffectL/SphereModify"
 				r.resNormal=normalize(n);
 				return r;
 			}
+			dataBuff getData(int i)
+			{
+				dataBuff o;
+				o._StartTime=_dAts[i].w;
+				o._Force=_pAfs[i].w;
+				o._ForceDir=mul((float3x3)unity_WorldToObject,_dAts[i].xyz);
+				o._WorldForcePos=mul(unity_WorldToObject,float4(_pAfs[i].xyz,1));
+				o._Namida=_Namida;
+				return o;
+			}
+			result WaveModify(float4 pos,in float3 normal)
+			{
+				result r;
+				float3 v;
+				float3 n=normal;
+				for(int i=0;i<_Count;i++){
+					dataBuff data=getData(i);
+					float3 dir=pos.xyz-data._WorldForcePos.xyz;
+					float distance=dot(dir,dir);
+					float time=_Time.y-data._StartTime;
+					float singleForce=data._Force/(1+distance);
+					float A=lerp(singleForce,0,saturate((_Damping*time)/abs(singleForce)));
+					float x=time-distance/data._Namida;
+					//x=x<0?0:x;
+					v+=-A*cos(_Spring*(x))*normal;
+					n+=v*dir;
+				}
+				n=normalize(n);
+				r.resPos=float4(pos.xyz+v,1);
+				r.resNormal=n;
+				return r;
+			}
+
 
 			FInput vert(VInput v)
 			{
@@ -85,7 +127,7 @@ Shader "EffectL/SphereModify"
 				o.LightDir=WorldSpaceLightDir(v.pos);
 				v.wpos=mul(unity_ObjectToWorld,v.pos);
 				float3 normal=mul((float3x3)unity_ObjectToWorld,v.nor);
-			    result w= ModifyPos(v.pos,normal);
+			    result w= WaveModify(v.pos,normal);
 			    o.pos=UnityObjectToClipPos(w.resPos);
 			    o.nor=w.resNormal;
 			    return o;
