@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+
 [ExecuteInEditMode]
 public class JellyShaderModify : MonoBehaviour,IGUNReciever
 {
@@ -11,8 +13,12 @@ public class JellyShaderModify : MonoBehaviour,IGUNReciever
     public float Spring;
     [SerializeField]
     public float Damping;
+    [SerializeField]
+    public int CountMax;
     private MeshRenderer render;
-    private float f;
+    private int probe;
+    private Vector4[] pAfs;
+    private Vector4[] dAts;
     private void OnEnable()
     {
         if (render == null)
@@ -25,16 +31,31 @@ public class JellyShaderModify : MonoBehaviour,IGUNReciever
             render.sharedMaterial = new Material(shader);
             render.hideFlags = HideFlags.HideInInspector;
         }
-        f = 0;
+        pAfs = new Vector4[CountMax];
+        dAts = new Vector4[CountMax];
+        probe = 0;
     }
-    public void AddForce(Vector3 pos, float force)
+    public void AddForce(Vector3 pos,Vector3 dir,float force)
     {
         Debug.Log("Bingo");
-        f = force;
-        render.sharedMaterial.SetVector("_WorldForcePos", pos);
-        render.sharedMaterial.SetFloat("_Force", f);
+        Vector4 posAndForce = new Vector4(pos.x, pos.y, pos.z, force);
+        Vector4 dirAndTime = new Vector4(dir.x, dir.y, dir.z, Time.time);
+        EnQueue(posAndForce, dirAndTime);
+        Transmit();
+    }
+    private void EnQueue(Vector4 a,Vector4 b)
+    {
+        pAfs[probe] = a;
+        dAts[probe] = b;
+        probe++;
+        probe %= CountMax;
+    }
+    private void Transmit()
+    {
+        render.sharedMaterial.SetInt("_Count", CountMax);
         render.sharedMaterial.SetFloat("_Spring", Spring);
         render.sharedMaterial.SetFloat("_Damping", Damping);
-        render.sharedMaterial.SetFloat("_StartTime", Time.time);
+        render.sharedMaterial.SetVectorArray("_pAfs", pAfs);
+        render.sharedMaterial.SetVectorArray("_dAts", dAts);
     }
 }

@@ -36,7 +36,7 @@ public class TestMeshCtr : MonoBehaviour
             UpdateVertices(i);
         }
         mesh.vertices = replaceVertices;
-        mesh.RecalculateNormals();
+        NormalSolver.RecalculateNormals(mesh,90);
     }
 
     #region InternalFunction
@@ -64,7 +64,7 @@ public class TestMeshCtr : MonoBehaviour
             dir = mesh.vertices[i]-pos;
             velocitySqr = dir.sqrMagnitude;
             singleForce = force / (1 + velocitySqr);
-            velocity[i] += dir.normalized * singleForce*Time.deltaTime;
+            velocity[i] += dir.normalized * singleForce;
         }
     }
 

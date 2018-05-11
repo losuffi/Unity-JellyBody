@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public interface IGUNReciever
 {
-    void AddForce(Vector3 pos, float force);
+    void AddForce(Vector3 pos,Vector3 dir, float force);
 }
 public class TestGun : MonoBehaviour
 {
@@ -28,7 +28,7 @@ public class TestGun : MonoBehaviour
                 }
                 if (hit.collider.GetComponent<IGUNReciever>() != null)
                 {
-                    hit.collider.GetComponent<IGUNReciever>().AddForce(hit.point, m_Force);
+                    hit.collider.GetComponent<IGUNReciever>().AddForce(hit.point,ray.direction.normalized, m_Force);
                 }
             }
 	    }

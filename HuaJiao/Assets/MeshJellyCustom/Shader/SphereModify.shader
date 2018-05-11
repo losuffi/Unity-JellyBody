@@ -1,3 +1,5 @@
+// Upgrade NOTE: replaced '_World2Object' with 'unity_WorldToObject'
+
 Shader "EffectL/SphereModify"
 {
 	Properties
@@ -12,13 +14,13 @@ Shader "EffectL/SphereModify"
 		#pragma fragment frag
 		#include "Lighting.cginc"
 		#include "AutoLight.cginc"
+		int _Count;
+		float4 _pAfs[10];
+		float4 _dAts[10];
 		float4 _MainColor;
-		float4 _WorldForcePos;
-		float _Force;
 		float _MaxForce;
 		float _Spring;
 		float _Damping;
-		float _StartTime;
 		ENDCG
 		Pass
 		{
@@ -40,17 +42,40 @@ Shader "EffectL/SphereModify"
 				float3 LightDir:TEXCOORD1;
 				float4 pos:SV_POSITION;
 			};
-
-			float4 ModifyPos(float4 pos,in float3 normal)
+			struct result
 			{
-				float3 dir=pos.xyz-_WorldForcePos.xyz;
-				float dis=dot(dir,dir);
-				float singleForce=_Force/(1+dis);
-				dir=normalize(dir);
-				float time=_Time.y-_StartTime;
-				float offset=sin(_Spring*time)*max(0,(singleForce-_Damping*time));
-				normal=lerp(normal,-dir,saturate(offset/_Force));
-				return half4(pos.xyz+dir*offset,1);
+				float4 resPos;
+				float3 resNormal;
+			};
+			result ModifyPos(float4 pos,in float3 normal)
+			{
+				result r;
+				float3 v;
+				float3 n=normal;
+				for(int i=0;i<_Count;i++)
+				{
+					float _StartTime=_dAts[i].w;
+					float _Force=_pAfs[i].w;
+					float3 _ForceDir=mul((float3x3)unity_WorldToObject,_dAts[i].xyz);
+					float4 _WorldForcePos=mul(unity_WorldToObject,float4(_pAfs[i].xyz,1));
+					float3 normalDir=pos.xyz-_WorldForcePos.xyz;
+					float3 dir=pos.xyz-(_WorldForcePos.xyz-_ForceDir*log2(1+_Force));
+					float dis=dot(dir,dir);
+					float singleForce=_Force/(dis*_Damping+1);
+					//float singleForce=exp2(-dis)*_Force;
+					dir=normalize(dir);
+					float time=_Time.y-_StartTime;
+					//float offset=(1/-_Spring)*cos(_Spring*time)*max(0,singleForce*time-0.5*_Damping*pow(time,2));
+					float A=lerp(singleForce,0,saturate((_Damping*time)/abs(singleForce)));
+					float offset=(sin(_Spring*time))*A;		
+					normal+=-normalDir*offset/(1-_Force+1);		
+					//normal=lerp(normal,normalDir, offset/(_Force+1));
+					v+=dir*offset;
+					n+=normal;
+				}
+				r.resPos=half4(pos.xyz+v,1);
+				r.resNormal=normalize(n);
+				return r;
 			}
 
 			FInput vert(VInput v)
@@ -59,12 +84,10 @@ Shader "EffectL/SphereModify"
 				o.texcoord=v.texcoord;
 				o.LightDir=WorldSpaceLightDir(v.pos);
 				v.wpos=mul(unity_ObjectToWorld,v.pos);
-			    _WorldForcePos=mul(unity_ObjectToWorld,float4(0,0,-1,1));
 				float3 normal=mul((float3x3)unity_ObjectToWorld,v.nor);
-			    float4 w= ModifyPos(v.wpos,normal);
-			    w=UnityObjectToClipPos(mul(unity_WorldToObject,w));
-			    o.pos=w;
-			    o.nor=normal;
+			    result w= ModifyPos(v.pos,normal);
+			    o.pos=UnityObjectToClipPos(w.resPos);
+			    o.nor=w.resNormal;
 			    return o;
 			}
 			float4 frag(FInput i):COLOR 
