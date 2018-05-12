@@ -5,6 +5,12 @@ using System.Collections.Generic;
 [ExecuteInEditMode]
 public class JellyShaderModify : MonoBehaviour,IGUNReciever
 {
+    public enum Type
+    {
+        Wave,
+        Explore,
+    }
+
     [SerializeField]
     private ComputeShader cs;
     [SerializeField]
@@ -17,6 +23,8 @@ public class JellyShaderModify : MonoBehaviour,IGUNReciever
     public float Namida;
     [SerializeField]
     public int CountMax;
+    [SerializeField]
+    public Type type;
     private MeshRenderer render;
     private int probe;
     private Vector4[] pAfs;
@@ -60,5 +68,17 @@ public class JellyShaderModify : MonoBehaviour,IGUNReciever
         render.sharedMaterial.SetFloat("_Namida",Namida);
         render.sharedMaterial.SetVectorArray("_pAfs", pAfs);
         render.sharedMaterial.SetVectorArray("_dAts", dAts);
+        switch(type)
+        {
+            case Type.Wave:
+                render.sharedMaterial.EnableKeyword("_IsWave");
+                render.sharedMaterial.DisableKeyword("_Explore");
+                break;
+            case Type.Explore:
+                render.sharedMaterial.EnableKeyword("_Explore");
+                render.sharedMaterial.DisableKeyword("_IsWave");
+                break;
+        }
+
     }
 }

@@ -59,6 +59,7 @@ public class TestMeshCtr : MonoBehaviour
     public void AddForcce(Vector3 pos, float force)
     { 
         Debug.Log("Bingo");
+        pos=transform.worldToLocalMatrix.MultiplyPoint(pos);
         for (int i = 0; i < mesh.vertices.Length; i++)
         {
             dir = mesh.vertices[i]-pos;
