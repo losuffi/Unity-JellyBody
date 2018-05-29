@@ -4,3 +4,4 @@
 ![](https://i.imgur.com/Z5XKNKs.gif)
 
 可改变参数：
+![](https://github.com/losuffi/HuaJiao/blob/master/P.gif)
