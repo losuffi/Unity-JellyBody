@@ -80,7 +80,7 @@ Shader "EffectL/SphereModify"
 					float3 wdir=mul((float3x3)unity_ObjectToWorld,dir);
 					float distance=dot(dir,dir);
 					float time=_Time.y-data._StartTime;
-					float singleForce=data._Force/(1+distance*5);
+					float singleForce=data._Force/(1+distance);
 					float A=lerp(singleForce,0,saturate((_Damping*time)/abs(singleForce)));
 					//float speed=data._Namida* (4*3.14*3.14)/_Spring;
 					//A=(speed*speed*time*time)>distance?A:0;	
